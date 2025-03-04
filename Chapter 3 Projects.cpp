@@ -1,24 +1,38 @@
 
 #include <iostream>
-#include <random>
+#include <cmath>
 #include <iomanip>
 using namespace std;
 
 int main()
 {
-	//creates 2 random numbers fom 0-4999
-	random_device myEngine;
-	uniform_int_distribution<int> randomInt(0, 4999);
-	int num1 = randomInt(myEngine);
-	int num2 = randomInt(myEngine);
+    float principal;
+    float rate;
+    int timesCompounded;
+    float finalAmount;
+    float intrestEarned;
 
-	//uses the two random numbers to create an addition problem
-	cout << setw(6) << num1 << endl;
-	cout << "+" << setw(5) << num2 << endl;
-	cout << "------";
-	cout << "    Press enter after you have answered the problem to check your work";
-	cin.get();
+    cout << "Please enter the prompted information to calculate \nthe balance of "
+        "your savings account.\n\n";
+    cout << setw(25) << left << "\nInterest Rate?:";
+    cin >> rate;
+    cout << setw(25) << "\nTimes Compounded:";
+    cin >> timesCompounded;
+    cout << setw(23) << "\nPrincipal:"
+        << "$ ";
+    cin >> principal;
 
-	cout << setw(6) << num1 + num2;
+    //makes the rate a percentage
+    rate /= 100;
+
+    //applies the given formula to the user input
+    finalAmount =
+        principal * pow((1 + (rate / timesCompounded)), timesCompounded);
+
+    intrestEarned = finalAmount - principal;
+
+    cout << setw(23) << "\nIntrest:" << "$ " << left << fixed << setprecision(2) << intrestEarned;
+
+    cout << setw(24) << "\n\nAmount in savings:" << "$ " << left << finalAmount;
 }
 
